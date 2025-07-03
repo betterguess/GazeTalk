@@ -3,7 +3,7 @@ export const getDeviceType = () => {
       const brands = navigator.userAgentData.brands.map(b => b.brand.toLowerCase()).join(',');
       if (brands.includes('apple')) {
         if (window.screen.width <= 834 && 'ontouchstart' in window) {
-          return 'ipad'; // heuristic for iPad with Mac user agent
+          return 'ipad'; 
         }
       }
     }

@@ -6,7 +6,7 @@ let lastActivatedTileId = null;
 let lastActivationTimestamp = 0;
 const CLICK_THROTTLE_DELAY = 250;
 
-const Tile = ({ tile, onActivate, dwellTime, otherLetters, onLetterSelected, logEvent, counterStarted }) => {
+const Tile = ({ tile, onActivate, dwellTime, otherLetters, onLetterSelected, logEvent, counterStarted, isTesting, inputEnabledForTests }) => {
   const { t } = useTranslation();
   const [hovering, setHovering] = useState(false);
   const [progress, setProgress] = useState(100);
@@ -38,6 +38,9 @@ const Tile = ({ tile, onActivate, dwellTime, otherLetters, onLetterSelected, log
   };
 
   const handleClick = () => {
+    if (isTesting && !inputEnabledForTests) {
+      return;
+    }
     if (gazeTimerRef.current) {
       clearTimeout(gazeTimerRef.current);
       gazeTimerRef.current = null;

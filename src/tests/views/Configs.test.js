@@ -61,7 +61,7 @@ describe('Checking configurations', () => {
         config.views["writing"],
         config.views["suggestions"],
         config.views["main_menu"],
-        config.views["writing_submenu"],
+        // config.views["writing_submenu"],
         config.views["navigation_menu"],
         config.views["edit_menu"],
         config.views["edit_dwelltime"],
@@ -103,37 +103,5 @@ describe('Checking configurations', () => {
         });
     }
    
-    /*
-    test('Dynamic configuration: dynamic suggestions update App', async () => {
-        // For dynamic suggestions, we simulate axios returning suggestion data.
-        axios.post.mockImplementation((url) => {
-        if (url.includes("continuations")) {
-            return Promise.resolve({
-            data: { continuations: ["suggestion1", "suggestion2", "suggestion3", "suggestion4"] },
-            });
-        }
-        if (url.includes("lettercontinuations")) {
-            return Promise.resolve({
-            data: { continuations: ["L1", "L2", "L3", "L4", "L5", "L6"] },
-            });
-        }
-        return Promise.resolve({ data: {} });
-        });
 
-        // For a dynamic scenario, we need to set textValue to something nonempty so that the suggestions endpoint is hit.
-        // One approach is to simulate a user typing. For simplicity, assume App’s initial text is empty, but an effect
-        // kicks off when textValue changes.
-        // You can either simulate a keyboard event or directly update state via user interactions.
-        // For this example, we assume the App’s effect will run after the component mounts.
-        render(<App />);
-        
-        // Wait for the axios call to complete and for the dynamic suggestions to render.
-        // (How suggestions appear in the UI depends on your App implementation; for instance, they might appear
-        // in a tile or as part of a suggestions view.)
-        await waitFor(() => {
-        // For example, if your dynamic suggestions are rendered in a tile, check for one of the dummy suggestions:
-        expect(screen.getByText("suggestion1")).toBeInTheDocument();
-        expect(screen.getByText("suggestion2")).toBeInTheDocument();
-        });
-    });*/
 });

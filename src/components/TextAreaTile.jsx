@@ -6,7 +6,7 @@ import * as TestConstants from "../constants/testConstants/testConstants";
 const TextAreaTile = ({ value, onChange, colspan = 2, customStyle, logEvent, counterStarted }) => {
   const inputRef = useRef(null);
   const displayRef = useRef(null);
-  const [caretStyle, setCaretStyle] = useState("caret-bar"); // Default caret style
+  const [caretStyle, setCaretStyle] = useState("caret-bar"); 
   const gazeTimerRef = useRef(null);
   const gazedMoreThanThreshold = useRef(false);
 
@@ -33,18 +33,15 @@ const TextAreaTile = ({ value, onChange, colspan = 2, customStyle, logEvent, cou
     }
   }, [value]);
   
-  // Function to update the display with custom caret
   const updateDisplay = () => {
     if (!inputRef.current || !displayRef.current) return;
   
     const text = inputRef.current.value;
     const cursorPos = inputRef.current.selectionStart;
   
-    // Split text into before and after cursor
     const beforeCursor = text.substring(0, cursorPos);
     const afterCursor = text.substring(cursorPos);
   
-    // Create content with caret
     let content = beforeCursor;
   
     if (caretStyle === 'caret-block' && afterCursor.length > 0) {
@@ -55,10 +52,8 @@ const TextAreaTile = ({ value, onChange, colspan = 2, customStyle, logEvent, cou
       content += afterCursor;
     }
   
-    // Update display
     displayRef.current.innerHTML = content;
-  
-    // **Scroll to cursor**
+
     const caretElement = displayRef.current.querySelector(".caret");
     if (caretElement) {
       const caretRect = caretElement.getBoundingClientRect();
@@ -72,7 +67,6 @@ const TextAreaTile = ({ value, onChange, colspan = 2, customStyle, logEvent, cou
     }
   };
   
-  // Event handlers for textarea
   const handleInput = () => updateDisplay();
   const handleClick = () => {
     if (gazeTimerRef.current) {

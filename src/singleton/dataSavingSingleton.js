@@ -59,12 +59,18 @@ export const saveLocally = () => {
     if (!isWellformed) {
         console.error(msg)
     }
+    
+
+    const name = data.form_data?.name || "unknown";
+    const date = new Date().toISOString().slice(0, 10);
+    
+
     const jsonData = JSON.stringify(data, null, 2);
     const jsonBlob = new Blob([jsonData], { type: 'application/json' });
     const jsonUrl = URL.createObjectURL(jsonBlob);
     const jsonLink = document.createElement('a');
     jsonLink.href = jsonUrl;
-    jsonLink.download = "data.json";
+    jsonLink.download = `${name}_${date}_data.json`;
     jsonLink.click();
     URL.revokeObjectURL(jsonUrl);
 }

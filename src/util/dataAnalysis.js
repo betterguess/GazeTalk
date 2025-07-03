@@ -1,8 +1,5 @@
 import {getDeviceType} from './deviceUtils.js'
-/*
-For finding the Root Mean Square from points in a list;
-<points> is a list of positions.
-*/
+
 const inch2mm = 25.4; // 1 inch = 25.4 mm
 export const find_rms = (points_x, points_y) => {
     let sx = 0.0
@@ -19,12 +16,6 @@ export const find_rms = (points_x, points_y) => {
 export const euclid_dist = ([x0, y0], [x1, y1]) =>
     Math.sqrt((x0 - x1)**2 + (y0 - y1)**2);
 
-// xs: x list
-// xy: y list
-// fx:  fixation x
-// fy:  fixation y
-// fi:  fixation index (the index that is active)
-// s : is shrinking
 // slice up the points into an array for each active fixation point
 export const split = (arr, fi) => fi.reduce((acc, index, i) => {
     acc[index] = acc[index] || [];
@@ -122,8 +113,6 @@ export const calculatePrecision = (xs, ys, fi, isShrinking) => {
 
 }
 
-
-// for example [0 0 0 1 1 2 2] => [0,1,2]
 export const fi2fiArr = (fi) => {
     return [...Array(fi[fi.length -1]).keys()];
 }
@@ -144,7 +133,6 @@ export const getPPI = () => {
     }
 }
 
-// checks an array of arrays to see if they are all the same length
 export const isSameLength = (arr) => {
     return arr.every((subArr) => subArr.length === arr[0].length);
 }

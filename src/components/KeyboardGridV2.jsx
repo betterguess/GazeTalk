@@ -6,6 +6,7 @@ import { getKeyboardGridV2Consts } from "../util/keyboardGridUtils";
 const KeyboardGridV2 = (props) => {
   const {
     cols = 4,
+    rows = 5,
     view,
     textValue,
     setTextValue,
@@ -20,11 +21,13 @@ const KeyboardGridV2 = (props) => {
     textFontSize,
     handleLetterSelected,
     alphabetPage,
+    isTesting,
+    inputEnabledForTests,
   } = props;
 
-  const rows = 5;
   const textAreaColSpan = cols - 1;
   const totalCols = cols + 2;
+  const totalRows = rows;
   const dynamicStart = 1 + textAreaColSpan;
   const baseTiles = view.tiles.filter((t) => t.type !== "textarea");
   const { ABCDIdx, dotIndex, spaceIdx, editIdx, delIdx, pauseIdx } = getKeyboardGridV2Consts(cols, textAreaColSpan);
@@ -33,17 +36,17 @@ const KeyboardGridV2 = (props) => {
   const alphabet = Array.from({ length: 26 }, (_, i) =>
     String.fromCharCode(97 + i)
   );
-  const pageSize = totalCols * (rows) - baseTiles.length - textAreaColSpan - 1;
+  const pageSize = totalCols * (totalRows) - baseTiles.length - textAreaColSpan - 1;
   const page = alphabetPage || 0;
   const start = page * pageSize;
   const pageLetters = alphabet.slice(start, start + pageSize);
-  const nextPageIdx = rows * totalCols - 1;
+  const nextPageIdx = totalRows * totalCols - 1;
   // --- Alphabet --- 
 
   return (
     <BaseKeyboardGrid
       {...props}
-      rows={rows}
+      rows={totalRows}
       cols={totalCols}
       textAreaConfig={{ row:1, col:2, colSpan:textAreaColSpan }}
       renderDynamic={(idx,row,col) => {

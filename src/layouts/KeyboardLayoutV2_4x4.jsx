@@ -8,6 +8,7 @@ const KeyboardLayoutV2_4x4 = (props) => {
 
 KeyboardLayoutV2_4x4.properties = {
   cols: 4,
+  rows: 5,
 };
 
 export default KeyboardLayoutV2_4x4;

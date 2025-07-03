@@ -15,20 +15,17 @@ export const edit_settingsConfig = {
           label: "layout",
           action: { type: "switch_view", view: "layouts" }
         },
-        {
-          type: "switch",
-          label: "dwell time",
-          action: { type: "switch_view", view: "edit_dwelltime" }
-        },
-        {
-          type: "switch",
-          label: "change language",
-          action: { type: "switch_view", view: "edit_language" }
-        },
+
         {
           type : "switch",
           label : "font size",
           action : {type : "switch_view", view : "adjust_font_size"}
-        }
+        },
+        {
+        type: "switch",
+        label: "Start Tests",
+        action:  { type: "enter_form", value: "enter_form" }
+      },
+
       ]
   };

@@ -1,8 +1,3 @@
-// npm i i18next
-// npm i react-i18next
-// npm i i18next-http-backend
-// npm i i18next-browser-languagedetector
-
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from "i18next-browser-languagedetector";

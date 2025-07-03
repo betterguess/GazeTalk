@@ -30,20 +30,5 @@ export const navigation_menuConfig = {
           label : "cursor to the right",
           action : { type: "cursor", direction : "right"}
         },
-        {
-          type : "cursor",
-          label : "cursor up",
-          action : { type: "cursor", direction : "up"}
-        },
-        {
-          type: "newline",
-          label : "newline",
-          action : { type: "newline", value: "\n"}
-        },
-        {
-          type : "cursor",
-          label : "cursor down",
-          action : { type: "cursor", direction : "down"}
-        },
       ]
   };

@@ -1,5 +1,4 @@
 import { updateGlobalCursorPosition } from "../singleton/cursorSingleton";
-import { speakText } from '../singleton/textToSpeachSingleton';
 import * as CmdConst from "../constants/cmdConstants";
 import * as UserDataConst from "../constants/userDataConstants";
 import * as TestConst from "../constants/testConstants/testConstants";
@@ -14,7 +13,6 @@ import {
     matchCase,
 } from './textUtils';
 import {
-  updateRanking,
   updateSetting,
 } from "./settingUtil";
 import {
@@ -25,8 +23,6 @@ import {
     getPreviousWord, 
     getPreviousSentence,
 } from './cursorUtils';
-
-
 
 import { layoutToButtonNum } from "../constants/layoutConstants";
 import * as DataSavingSingleton from "../singleton/dataSavingSingleton";
@@ -47,18 +43,9 @@ export const handleAction = (
     userData,
     setUserData,
     speakText,
-    alarmActive,
-    nextLetterSuggestion,
     setAlarmActive,
-    isPaused,
     setIsPaused,
-    setNextLetterSuggestion,
-    letterSuggestions,
-    setLetterSuggestions,
-    nextLetters,
-    setNextLetters,
     suggestions,
-    setSuggestions,
     buttonFontSize,
     setButtonFontSize,
     textFontSize,
@@ -67,22 +54,16 @@ export const handleAction = (
     setCurrentLayoutName,
     currentLayoutName,
     setShowSuggestions,
-    showSuggestions, 
     changeButtonNum,
-    buttonNum,
     isTesting,
     counterStarted,
     startUserTest,
     logEvent,
-    abandonTest,
     dwellTime,
     currentTestIndex,
     setAlphabetPage,
-    nextView,
-    setNextView,
     setNextLayout,
     setTestSuiteActive,
-    enterForm, 
     setEnterForm
   }
 ) => {
@@ -196,6 +177,7 @@ export const handleAction = (
         break;
     }
     case CmdConst.START_TRACKER_TEST: {
+        DataSavingSingleton.data.form_data.layout = currentLayoutName;
         startTrackerTest()
         break;
     }

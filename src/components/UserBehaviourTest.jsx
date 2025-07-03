@@ -37,7 +37,7 @@ export const UserBehaviourTestProvidor = ({ children }) => {
       return;
     }
     if (id === 0) {
-      randomTests.current = shuffleTestSentences([...testSentences]).slice(0, numberOfTests); // pick 10 random sentences
+      randomTests.current = shuffleTestSentences([...testSentences]).slice(0, numberOfTests); // pick n random sentences
       setIsTesting(true);
       setLogs([]); // clear previous logs
       const settingsEvent = {
@@ -83,7 +83,7 @@ export const UserBehaviourTestProvidor = ({ children }) => {
       timestamp: new Date().toISOString(),
       device : getDeviceType(),
       mouseArray: mouseArray ? mouseArray : [],
-      // You can add any additional metadata here
+      
     };
     
     // Log that we're sending data
@@ -103,8 +103,6 @@ export const UserBehaviourTestProvidor = ({ children }) => {
     .then(response => response.json())
     .then(data => {
       console.log('Success:', data);
-      // You could show a success message to the user here
-      //alert(`Test data successfully saved to server as: ${data.filename}`);
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -119,14 +117,6 @@ export const UserBehaviourTestProvidor = ({ children }) => {
       alert("Failed to save data to server. Downloaded locally instead." + currentIP);
     })
     .finally(() => {
-      // Reset state regardless of success/failure
-      //const dataToDownload = JSON.stringify(completeTestLogs.current, null, 2);
-      //var today = new Date();
-      //var dd = String(today.getDate()).padStart(2, '0');
-      //var mm = String(today.getMonth() + 1).padStart(2, '0');
-      //var time = String(today.getHours()).padStart(2, '0') + "-" + String(today.getMinutes()).padStart(2, '0') + "-" + String(today.getSeconds()).padStart(2, '0');
-      //const filename = `test_run_${dd}-${mm}_${time}.json`;
-      //downloadTestData(dataToDownload, filename);
       DataSavingSingleton.data.writing_test = completeTestLogs.current;
       completeTestLogs.current = [];
       setCurrentTestIndex(-1);
@@ -160,7 +150,6 @@ export const UserBehaviourTestProvidor = ({ children }) => {
     console.log("Test reset");
   };
 
-  // Generic event logging function
   const logEvent = (event) => {
     if (!isTesting) {
       setLogs(prevLogs => [
@@ -254,25 +243,10 @@ export const UserBehaviourTestProvidor = ({ children }) => {
       };
   }, []);
 
-  // function levenshtein (a, b) {
-  //   if (a.length === 0) return b.length;
-  //   if (b.length === 0) return a.length;
-
-  //   if (a[0] === b[0]) {
-  //     return levenshtein(a.slice(1), b.slice(1));
-  //   }
-
-  //   const insertDist = levenshtein(a, b.slice(1));
-  //   const deleteDist = levenshtein(a.slice(1), b);
-  //   const replaceDist = levenshtein(a.slice(1), b.slice(1));
-
-  //   return 1 + Math.min(insertDist, deleteDist, replaceDist);
-  // } 
-
   const downloadTestData  = (data, filename) => {
     const blob = new Blob([data], { type: "application/json;charset=utf-8" });
     const url = window.URL.createObjectURL(blob);
-    // const url = "139.162.147.37:5000/save-json"
+
     const a = document.createElement("a");
     a.style.display = "none";
     a.href = url;
@@ -307,7 +281,7 @@ export const UserBehaviourTestProvidor = ({ children }) => {
   );
 };
 
-// Custom hook to use the Testing context
+
 export const useTesting = () => {
   return useContext(UserBehaviourTest);
 };

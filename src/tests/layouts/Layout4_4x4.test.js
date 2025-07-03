@@ -4,7 +4,7 @@ import axios from "axios";
 import "@testing-library/jest-dom";
 import App from '../../App';
 import { UserBehaviourTestProvidor } from '../../components/UserBehaviourTest';
-// Mock react-i18next to return a simple translation function.
+// Mock react-i18next to return a translation function.
 
 HTMLMediaElement.prototype.play = () => Promise.resolve();
 

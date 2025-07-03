@@ -4,7 +4,7 @@ import KeyboardGridV1 from '../../components/KeyboardGridV1';
 import { config } from '../../config/config';
 import '@testing-library/jest-dom';
 
-// Get TextareaTile and Tile components.
+
 jest.mock('../../components/TextAreaTile', () => (props) => (
   <div data-testid="textarea-tile">{props.value}</div>
 ));
@@ -45,10 +45,10 @@ describe('KeyboardGridV1 component', () => {
       />
     );
 
-    // Check Empty content in TextAreaTile
-    expect(screen.getByTestId('textarea-tile')).toHaveTextContent(''); //Resembles empty string for some reason
 
-    // Check number of Tiles
+    expect(screen.getByTestId('textarea-tile')).toHaveTextContent(''); 
+
+
     const renderedTiles = screen.getAllByTestId('tile');
     expect(renderedTiles.length).toBe(10);
   });

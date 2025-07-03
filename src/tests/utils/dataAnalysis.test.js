@@ -1,9 +1,7 @@
 import '@testing-library/jest-dom';
-import { getLastSentence } from '../../util/textUtils';
-import { calculateAccuracy, euclid_dist, distls, isSameLength, fi2fiArr, split, distAverge, mean, removeNull, getPPI, pix2mm, removeIfNotShrinking, rms, sd, calculatePrecision} from '../../util/dataAnalysis';
-import exp from 'node:constants';
 
-import { get } from 'node:http';
+import { calculateAccuracy, euclid_dist, distls, isSameLength, fi2fiArr, split, distAverge, mean, removeNull, getPPI, pix2mm, removeIfNotShrinking, rms, sd, calculatePrecision} from '../../util/dataAnalysis';
+
 const fs = require('node:fs');
 
 describe('accuracy', () => {
@@ -55,7 +53,7 @@ describe('accuracy', () => {
         const fySplit = split(fy, fi);
 
 
-        expect(isSameLength([xs,ys,fi])).toBe(true); // why is the lengths different ?
+        expect(isSameLength([xs,ys,fi])).toBe(true); 
         expect(isSameLength([fx,fy])).toBe(true);
         const distances = distls(xsSplit, ysSplit, fxSplit, fySplit);
 
@@ -90,14 +88,14 @@ describe('accuracy', () => {
         const fxSplit = split(fx, fi);
         const fySplit = split(fy, fi);
 
-        expect(isSameLength([xs,ys,fi])).toBe(true); // why are the lengths different ?
+        expect(isSameLength([xs,ys,fi])).toBe(true);
         expect(isSameLength([fx,fy])).toBe(true);
         const distances = distls(xsSplit, ysSplit, fxSplit, fySplit);
 
-        // fs.writeFileSync('src/tests/utils/testData/lastDistance.json', JSON.stringify(removeNull(distances[distances.length - 1])));
+
         const averages = distAverge(distances);
 
-        expect(averages.every((avg) => typeof avg === 'number')).toBe(true); // check if all averages are numbers
+        expect(averages.every((avg) => typeof avg === 'number')).toBe(true); 
     
     })
     test('calcutate pixel density', () => { 
@@ -111,7 +109,7 @@ describe('accuracy', () => {
         const fxSplit = split(fx, fi);
         const fySplit = split(fy, fi);
 
-        expect(isSameLength([xs,ys,fi])).toBe(true); // why are the lengths different ?
+        expect(isSameLength([xs,ys,fi])).toBe(true);
         expect(isSameLength([fx,fy])).toBe(true);
         const distances = distls(xsSplit, ysSplit, fxSplit, fySplit);
         const averages = distAverge(distances);
@@ -139,13 +137,13 @@ describe('accuracy', () => {
         const isShrinking = content.tracking_points.is_shrinking
 
         const data = calculateAccuracy(xs,ys,fx,fy,fi, isShrinking)
-        // fs.writeFileSync('src/tests/utils/testData/data.json', JSON.stringify(data[0]));
+        
         expect(data.accuracy).toBeCloseTo(21.31656761903601, 1);
     })
     test('rms', () => {
         const arr = [1, 2, 3, 4, 5]
         const result = rms(arr)
-        // console.log("rms: ", result);
+        
         expect(result).toBeCloseTo(1, 1);
     })
     test('sd', () => {
@@ -162,12 +160,11 @@ describe('accuracy', () => {
         const isShrinking = content.tracking_points.is_shrinking
 
         const precision0 = calculatePrecision(xs, ys, fi, isShrinking) 
-        // fs.writeFileSync('src/tests/utils/testData/data.json', JSON.stringify(precision0[0]));
+       
 
         const precision1 = calculatePrecision(xs, ys, fi, null)
         
-        // console.log("precision0: ", precision0);
-        // console.log("precision1: ", precision1);
+        
 
 
     })

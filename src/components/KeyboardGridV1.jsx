@@ -22,6 +22,8 @@ const KeyboardGridV1 = (props) => {
     textValue,
     textFontSize,
     handleLetterSelected,
+    isTesting,
+    inputEnabledForTests,
   } = props;
 
 

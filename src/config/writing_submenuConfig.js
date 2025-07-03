@@ -3,7 +3,7 @@ export const writing_submenuConfig = {
     tiles: [
         {
           type: "textarea",
-          colspan: 2 // This tile spans 2 columns
+          colspan: 2 
         },
         {
           type: "letter",
@@ -17,33 +17,28 @@ export const writing_submenuConfig = {
         },
         {
           type: "switch",
-          label: "ABCDEFGH",
+          label: "ABCD\nEFGH",
           action: { type: "switch_view", view: "ABCDEFGH_menu" }
         },
         {
           type: "switch",
-          label: "IJKLMNOP",
+          label: "IJKL\nMNOP",
           action: { type: "switch_view", view: "IJKLMNOP_menu" }
         },
         {
           type: "switch",
-          label: "QRSTUVWX",
+          label: "QRST\nUVWX",
           action: { type: "switch_view", view: "QRSTUVWX_menu" }
         },
         {
           type: "switch",
-          label: "YZÆØÅ,?.._",
+          label: "YZÆØ\nÅ,?.._",
           action: { type: "switch_view", view: "YZÆØÅ,?.._menu" }
         },
         {
           type: "switch",
           label: "0-9",
           action: { type: "switch_view", view: "numbers" }
-        },
-        {
-          type: "toggle_case",
-          label: "CAPS",
-          action: { type: "toggle_case" }
         },
         {
           type: "switch",

@@ -24,6 +24,7 @@ import { layoutsConfig } from "./layoutsConfig"
 import { trackerTestConfig } from "./trackerTestConfig"
 import { first_pageConfig } from "./first_pageConfig";
 import { Alphabet_V2Config } from "./AlphabetV2";
+import {development_menuConfig} from "./developer_menuConfig"
 export const config = {
   views: {
       "first_page": first_pageConfig,
@@ -51,5 +52,6 @@ export const config = {
       "layouts": layoutsConfig,
       "tracker_test" : trackerTestConfig,
       "Alphabet_V2": Alphabet_V2Config,
+      "development_menu" : development_menuConfig,
     }
 };

@@ -3,10 +3,9 @@ import Tile from "./Tile";
 import * as DataSavingSingleton from "../singleton/dataSavingSingleton";
 
 const FormPopup = ({ onClose, dwellTime }) => {
-  const [selectedDeviceMethod, setSelectedDeviceMethod] = useState(""); // new state
+  const [selectedDeviceMethod, setSelectedDeviceMethod] = useState(""); 
 
   useEffect(() => {
-    // Effect logic here
   }, []);
 
   const submit = () => {
@@ -15,7 +14,7 @@ const FormPopup = ({ onClose, dwellTime }) => {
       device: document.querySelector('.deviceInput').value,
       screensize: document.querySelector('.screensizeInput').value,
       screen_resolution: window.screen.width + "x" + window.screen.height,
-      interaction_method: selectedDeviceMethod, // save selected method
+      interaction_method: selectedDeviceMethod, 
     }
     DataSavingSingleton.data.form_data = data;
     onClose();
@@ -36,7 +35,7 @@ const FormPopup = ({ onClose, dwellTime }) => {
         <div>
           <p>Please write what device you are using</p>
           <input className="deviceInput" type="text" placeholder="iPad gen 10" />
-          Please enter the screen size in inches
+          If you are not using iPhone or iPad, please enter the screen size in inches
           <input className="screensizeInput" type="text" placeholder="27" />
         </div>
         <div>
@@ -49,7 +48,7 @@ const FormPopup = ({ onClose, dwellTime }) => {
             />
             Eye Tracking
           </label>
-          {/* <br />
+          <br />
           <label className="checkbox-label">
             <input
               type="checkbox"
@@ -58,7 +57,7 @@ const FormPopup = ({ onClose, dwellTime }) => {
             />
             Head Tracking
           </label>
-          <br /> */}
+          <br />
           <label className="checkbox-label">
             <input
               type="checkbox"

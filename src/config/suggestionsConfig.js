@@ -1,10 +1,10 @@
 export const suggestionsConfig = {
     name: "suggestions",
       tiles: [
-        // Row 1 (4 tiles): first two tiles combined into a textarea
+       
         {
           type: "textarea",
-          colspan: 2 // This tile spans 2 columns
+          colspan: 2 
         },
         {
           type: "delete",

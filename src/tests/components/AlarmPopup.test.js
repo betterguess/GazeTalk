@@ -1,10 +1,8 @@
-// AlarmPopup.test.js
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import AlarmPopup from '../../components/AlarmPopup';
 
-// Render the Tile component since it's used by the AlarmPopup
 jest.mock('../../components/Tile', () => (props) => {
   return (
     <button onClick={props.onActivate}>
@@ -14,7 +12,6 @@ jest.mock('../../components/Tile', () => (props) => {
 });
 
 describe('AlarmPopup component', () => {
-    //Idk I can only get play using this precondition
     beforeAll(() => {
         HTMLMediaElement.prototype.play = jest.fn().mockResolvedValue();
     });
@@ -27,7 +24,6 @@ describe('AlarmPopup component', () => {
     });
 
     test('Check audio playing', () => {
-        //Used to find play attribute
         const playSpy = jest
             .spyOn(window.HTMLMediaElement.prototype, 'play')
             .mockImplementation(() => Promise.resolve());

@@ -1,22 +1,20 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./TrackerLayout.css";
-import KeyboardGridV1 from "../components/KeyboardGridV1.jsx";
-import * as DA from "../util/dataAnalysis.js"
-import { useLocalStorage } from "@uidotdev/usehooks";
+
 import { getDeviceType } from "../util/deviceUtils.js";
 import { calculateAccuracy, calculatePrecision } from "../util/dataAnalysis.js";
 import * as CmdConst from "../constants/cmdConstants.js";
-import * as DataSavingSingleton from "../singleton/dataSavingSingleton";
+import * as DataSavingSingleton from "../singleton/dataSavingSingleton.js";
 const TrackerLayout = (props) => {
     const logInterval = 5;
     const transitionTime = 2000;
     
     const handleAction = props.onTileActivate;
-    const nextView = props.nextView // Default to "main_menu" if nextView is not provided
+    const nextView = props.nextView 
     const nextLayout = props.nextLayout;
     const testSuiteActive = props.testSuiteActive;
 
-    const currentLayout = props.currentLayout ? props.currentLayout : "2+2+4x2"; // Default to "2+2+4x2" if currentLayout is not provided
+    const currentLayout = props.currentLayout ? props.currentLayout : "2+2+4x2";
     const screenPoints = [
         { top: "10%", left: "10%" },     // Top-left
         { top: "30%", left: "30%" },   // Top-left (inner)
@@ -64,7 +62,7 @@ const TrackerLayout = (props) => {
             points: screenPoints,
     });
 
-    // Clear all timeouts
+   
     const clearAllTimeouts = () => {
         timeoutRefs.current.forEach(timeoutId => clearTimeout(timeoutId));
         timeoutRefs.current = [];
@@ -78,15 +76,15 @@ const TrackerLayout = (props) => {
     // Handle point transitions
     useEffect(() => {
         
-        const initialWaitTime = 5000; // 5 seconds initial wait time
-        const waitTime = 2000; // 2 seconds wait time
-        const shrinkTime = transitionTime - 800; // Leave 800ms buffer before next point
+        const initialWaitTime = 5000; 
+        const waitTime = 2000; 
+        const shrinkTime = transitionTime - 800;
     
         const moveToNextPoint = () => {
-            // Cancel any ongoing animations and timeouts
+           
             clearAllTimeouts();
     
-            // Reset scale before moving to next point
+            
             setScale(1);
     
             // Move to next point
@@ -98,32 +96,28 @@ const TrackerLayout = (props) => {
                 console.log("COMPLETE")
                 setIsComplete(true);
                 calculateStats();
-                // Proceed to the next layout after the last point
-                // debugger
+
                 testSuiteActive ? proceedToTest() : switchToMainMenu();
 
-                return; // Stop transitions when reaching the last point
+                return; 
             }
     
-            // Wait for 2 seconds at the new point before starting to shrink
             const waitTimer = setTimeout(() => {
                 startShrinking(shrinkTime);
             }, waitTime);
     
             timeoutRefs.current.push(waitTimer);
     
-            // Schedule the next point transition
+            
             const nextPointTimer = setTimeout(moveToNextPoint, waitTime + shrinkTime);
             timeoutRefs.current.push(nextPointTimer);
         };
     
-        // Initial wait before starting the cycle
+        
         const initialWaitTimer = setTimeout(() => {
-            // Start shrinking the first point
             isStarted.current = true;
             startShrinking(shrinkTime);
             
-            // Schedule the move to the next point after the shrinking animation completes
             const nextPointTimer = setTimeout(() => {
                 moveToNextPoint();
             }, shrinkTime);
@@ -133,7 +127,6 @@ const TrackerLayout = (props) => {
         
         timeoutRefs.current.push(initialWaitTimer);
         
-        // Cleanup on unmount
         return () => {
             clearAllTimeouts();
         };
@@ -157,7 +150,7 @@ const TrackerLayout = (props) => {
 
         // Start the animation
         animationRef.current = requestAnimationFrame(animate);
-        // console.log("Shrinking animation started for duration:", animationRef.current !== null);
+
 
     };
 
@@ -169,7 +162,7 @@ const TrackerLayout = (props) => {
         const handleMouseMove = (event) => {
             const newPosition = { x: event.clientX, y: event.clientY };
             setMousePosition(newPosition);
-            mousePositionRef.current = newPosition; // Update the ref
+            mousePositionRef.current = newPosition;
         };
         
         window.addEventListener("mousemove", handleMouseMove);
@@ -184,8 +177,6 @@ const TrackerLayout = (props) => {
 
             setTrackingData(prevData => {
                 if (!isStarted.current) return prevData; // Don't log data if not started
-                // console.log(isStarted.current)
-                // console.log("logging data")
                 const newData = { ...prevData };
                 const tracking_points = newData.tracking_points;
                 // Use the ref value which is always up-to-date
@@ -210,7 +201,7 @@ const TrackerLayout = (props) => {
         }, logInterval);
 
         return () => clearInterval(logData);
-    }, [logInterval]); // Keep the dependency array as is
+    }, [logInterval]); 
     
     const calculateStats = () => {
         
@@ -245,7 +236,7 @@ const TrackerLayout = (props) => {
             trackingData.tracking_points.is_shrinking
         )
 
-        setPrevoiusLargest(0) // Reset the largest index for the next test
+        setPrevoiusLargest(0)
         // only save data if the test SUITE is not active
         if (!DataSavingSingleton.testActive.isActive) {
             saveTrackingData()
@@ -256,7 +247,7 @@ const TrackerLayout = (props) => {
         // Format timestamp for the filename
         var today = new Date();
         var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
         var time = String(today.getHours()).padStart(2, '0') + "-" + String(today.getMinutes()).padStart(2, '0') + "-" + String(today.getSeconds()).padStart(2, '0');
         
         const filename = `eyeTrackingData_${dd}-${mm}_${time}.json`;
@@ -303,7 +294,6 @@ const TrackerLayout = (props) => {
         });
     }
     const switchToMainMenu = () => {
-        // Call handleAction here
         if (handleAction) { 
             if (DataSavingSingleton.testActive.isActive) {
                 DataSavingSingleton.data.second_calibration = trackingData
@@ -315,19 +305,14 @@ const TrackerLayout = (props) => {
             handleAction(action);
             const action2 = { type: "switch_view", view: nextView };
             handleAction(action2);
-            // handleAction({type: CmdConst.START_WRITING_TEST})
 
         }
         
         
     }
     const proceedToTest = () => {
-        // Call handleAction here
         if (handleAction) { 
-            // switch to the last set layout
             handleAction({ type: "switch_layout", value: props.nextLayout });
-            // const action2 = { type: "switch_view", view: nextView };
-            // handleAction(action2);
             DataSavingSingleton.data.first_calibration = trackingData
             handleAction({type: CmdConst.START_WRITING_TEST})
         }
@@ -338,7 +323,7 @@ const TrackerLayout = (props) => {
 
         <div>                                                   
              <div ref={containerRef} className="calibrationDiv">
-                 {/* Static background circle with 50% opacity */}
+                 
                  <div
                      className={`static-circle ${isComplete ? 'fade-out' : ''}` }
                      style={{
@@ -347,7 +332,7 @@ const TrackerLayout = (props) => {
                      }}
                  />
 
-                 {/* Shrinking circle */}
+                 
                  <div
                      className={`shrinking-circle ${isComplete ? 'fade-out' : ''}`}
                      style={{

@@ -22,9 +22,11 @@ const BaseKeyboardGrid = ({
   handleLetterSelected,
   logEvent,
   counterStarted,
+  isTesting,
+  inputEnabledForTests
 }) => {
   const total = rows * cols;
-  const baseProps = { onActivate: onTileActivate, dwellTime, logEvent, counterStarted };
+  const baseProps = { onActivate: onTileActivate, dwellTime, logEvent, counterStarted, isTesting, inputEnabledForTests };
 
 
   return (
@@ -66,7 +68,6 @@ const BaseKeyboardGrid = ({
           return;
         }
 
-        // 2) dynamic
         const spec = renderDynamic(idx, row, col);
         if (!spec) {
           return <div key={idx} />;

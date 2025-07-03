@@ -12,10 +12,7 @@
 /* Force Landscape Mode */
 @media screen and (orientation: portrait) {
   body {
-    /* transform: rotate(90deg); */
     transform-origin: left;
-    /* width: 100vh;
-    height: 100vw; */
     overflow: hidden;
     position: fixed;
     
@@ -24,11 +21,11 @@
 
 
 html, body {
-  touch-action: manipulation; /* Disables double-tap zoom */
-  -webkit-user-select: none; /* Prevents text selection */
+  touch-action: manipulation;
+  -webkit-user-select: none; 
   -ms-user-select: none;
   user-select: none;
-  overflow: hidden; /* Prevents scrolling and accidental zooming */
+  overflow: hidden; 
 }
 
 .generic-view {

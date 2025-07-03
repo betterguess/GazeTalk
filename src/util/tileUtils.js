@@ -1,10 +1,7 @@
 export const getNeighbours = (tileIndex, cols, rows, nextLetters, offset, suggestion) => {
     if (nextLetters.length == 0) {
-        // console.log("nextLetters is empty")
-        return [];
     }
     if (nextLetters == null) {
-        // console.log("nextLetters is null")
         return [];
     }
     if (tileIndex >= nextLetters.length) {

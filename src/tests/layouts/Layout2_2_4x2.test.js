@@ -7,7 +7,7 @@ import { UserBehaviourTestProvidor } from '../../components/UserBehaviourTest';
 
 HTMLMediaElement.prototype.play = () => Promise.resolve();
 
-// Mock react-i18next to return a simple translation function.
+// Mock react-i18next to return a translation function.
 jest.mock('i18next', () => ({
     changeLanguage: jest.fn(),
   }));

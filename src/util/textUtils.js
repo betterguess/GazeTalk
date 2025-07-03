@@ -30,8 +30,7 @@ export const matchCase = (suggestion, existingWord = "") => {
 export const getWordBoundaries = (text, cursorPosition) => {
     let start = cursorPosition;
     let end = cursorPosition;
-  
-    
+
     // get the left boundary
     while (start > 0 && !/\s/.test(text[start - 1])) {
       start--;
@@ -78,16 +77,9 @@ export const getWordBoundaries = (text, cursorPosition) => {
   };
   
   export const deleteWordAtCursor = (textValue, cursorPosition) => {
-    // const { x0, x1 } = getWordBoundaries(textValue, cursorPosition);
-
-
     let start = cursorPosition;
     let end = cursorPosition;
     let hadSpaceLeftInitially = false;
-    // include all spaces
-    // while (start > 0 && /\s/.test(textValue[start - 1])) {
-    //   start--;
-    // }
     // get the left boundary
     if (start > 0 && !/\s/.test(textValue[start - 1])) {
       while (start > 0 && !/\s/.test(textValue[start - 1])) {
@@ -186,18 +178,3 @@ export const getWordBoundaries = (text, cursorPosition) => {
     }
     return newArr;
 }
-// export const insertSuggestion = (action, textValue) => {
-//     const suggestion = action.value;
-
-//     const cursorPos = globalCursorPosition.value;
-//     const textUpToCursor = textValue.slice(0, cursorPos);
-//     const rest = textValue.slice(cursorPos, textValue.length);
-//     const lastSpaceIndex = textUpToCursor.lastIndexOf(" ");
-//     const lastWord = lastSpaceIndex >= 0
-//       ? textUpToCursor.slice(lastSpaceIndex + 1)
-//       : textUpToCursor;
-//     const replaced = textUpToCursor.slice(0, textUpToCursor.length - lastWord.length);
-//     const casedSuggestion = matchCase(suggestion, lastWord);
-//     const newText = replaced + casedSuggestion + " " + rest;
-//     return newText
-//   }
